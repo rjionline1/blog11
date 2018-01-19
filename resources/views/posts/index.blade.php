@@ -18,6 +18,7 @@
 	<div class="col-md-8 col-md-offset-2">
 		<table style="width:100%" class="table table-striped">
 		  <tr>
+		  	<th>No.</th>
 		    <th>Title</th>
 		    <th>Body</th> 
 		    <th>Created At</th>
@@ -28,16 +29,22 @@
 		  </tr>
 		  @foreach($posts as $post)
 		  <tr>
+		  	<td>{{$post->id}}</td>
 		    <td>{{$post->title}}</td>
-		    <td>{{substr($post->body, 0, 50)}}{{strlen($post->body) > 10 ? "..." : ""}}</td> 
+		    <td>{{substr($post->body, 0, 50)}}{{strlen($post->body) > 50 ? "..." : ""}}</td>
 		    <td>{{$post->created_at}}</td>
 		    <td>{{$post->updated_at}}</td>
 		    <td><a href="{{route('posts.show', $post->id)}}" class="btn btn-sm btn-default">View</a></td>
 		    <td><a href="{{route('posts.edit', $post->id)}}" class="btn btn-sm btn-default">Edit</a></td>
-		    <td><a href="{{route('posts.destroy', $post->id)}}" class="btn btn-sm btn-default">Delete</a></td></td>
+		    <td>{!!Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'DELETE', 'onsubmit' => "return confirm('Are you sure you want to delete?')"])!!}
+				{!!Form::submit('Delete', ['class' => 'btn btn-danger btn-sm'])!!}
+				{!!Form::close()!!}</td>
 		  </tr>
 		  @endforeach
 		</table>
+		<div class="text-center">
+			{!!$posts->links();!!}
+		</div>
 	</div>
 </div>
 @endsection

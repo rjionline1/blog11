@@ -6,6 +6,8 @@
 
 @yield('stylesheets')
 
+@yield('select2')
+
   </head>
 
   <body>
