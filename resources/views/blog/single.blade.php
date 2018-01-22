@@ -11,13 +11,17 @@
 		<h1>{{$post->title}}</h1>
 		<p>{{$post->body}}</p>
 		<hr>
-		Posted in: {{$post->category->name}}
+		<strong>Posted in:</strong> {{$post->category->name}}
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		@foreach ($post->comments as $comment)
-			{{$comment->comment}}
+			<div class="comment">
+				<hr>
+				<p><strong>Name:</strong> {{$comment->name}}</p>
+				<p><strong>Comment:</strong> <br>{{$comment->comment}}</p>
+			</div>
 		@endforeach
 	</div>
 </div>
